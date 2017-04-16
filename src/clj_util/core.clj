@@ -93,6 +93,26 @@
                    " "
                    (repeat pad-wid padding)]))))
 
+(defn string-shortened-with-hash 
+  "If a string is too long, shorten it but keep it unique by having it
+  end with a hash code.  The default max length is 255 characters.
+  For example, if putting strings in a database but the strings can be
+  too long to work in the column, use this to shorten them while
+  keeping them more-or-less unique."
+  ;; Specify max length
+  ([string max-length]
+   (if (-> string count (> max-length))
+     (let [code (str "..HASH"(hash string))
+           new-length (- max-length (count code))
+           shortened (subs string 0 new-length)
+           final (str shortened code)]
+       ;; (println (str "'" final "'"))
+       (assert (<= (count final) max-length))
+       final)
+     string))
+  ;; Default max length
+  ([string] (string-shortened-with-hash string 255)))
+
 (defn println-center [string padding width]
   "Print a string after surrounding it with padding so it a certain width."
   (println (string-center string padding width)))
