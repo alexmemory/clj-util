@@ -1,5 +1,6 @@
 (defproject org.clojars.alexmemory/clj-util "0.1.0"
   :description "Utilities for Clojure"
+  :url "https://github.com/alexmemory/clj-util"
   :dependencies [
                  [clj-time "0.11.0"]
                  [org.clojure/clojure "1.7.0"]
