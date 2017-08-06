@@ -18,6 +18,11 @@
 (defmacro dbg "Debugging parts of expressions."
   [x] `(let [x# ~x] (println "dbg:" '~x "=" x#) x#))
 
+(defmacro dbgw "Debugging parts of expressions, printing to maximum width."
+  [x w] `(let [x# ~x
+               msg# (str "dbg: " '~x " = " (pr-str x#))]
+           (printlnw msg# ~w) x#))
+
 (defmacro dbgsym
   "Debugging a symbol by interning it in the 'dbg namespace, creating
   that namespace if it doesn't exist already."
